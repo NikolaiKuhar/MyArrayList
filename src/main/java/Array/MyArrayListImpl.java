@@ -5,7 +5,7 @@ import java.util.Arrays;
 public class MyArrayListImpl implements MyArray{
 
     private String[] ar;
-    int size = 0;
+    private int size = 0;
 
     @Override
     public String get(int index) {
@@ -23,7 +23,7 @@ public class MyArrayListImpl implements MyArray{
     @Override
     public void add(String string, int index) {
         checkLength();
-        for (int i = size; i < index; i--) {
+        for (int i = size; i > index; i--) {
             ar[i] = ar[i-1];
         }
         ar[index] = string;
@@ -38,7 +38,7 @@ public class MyArrayListImpl implements MyArray{
             return;
         }
 
-        remove(String.valueOf(pos));
+        remove(pos);
     }
 
     @Override
@@ -46,6 +46,7 @@ public class MyArrayListImpl implements MyArray{
         for (int i = index; i < size; i++) {
             ar[i] = ar[i+1];
         }
+        size--;
     }
 
     @Override
@@ -95,5 +96,48 @@ public class MyArrayListImpl implements MyArray{
     @Override
     public String toString () {
         return Arrays.toString(Arrays.copyOf(ar, size));
+    }
+
+    public void quickSort(){
+        quickSort(ar, 0, this.size - 1);
+    }
+
+    private void quickSort(String[] array, int low, int high) {
+        if (ar.length == 0)
+            return;//завершить выполнение если длина массива равна 0
+
+        if (low >= high)
+            return;//завершить выполнение если уже нечего делить
+
+        // выбрать опорный элемент
+        int middle = low + (high - low) / 2;
+        String opora = ar[middle];
+
+        // разделить на подмассивы, который больше и меньше опорного элемента
+        int i = low, j = high;
+        while (i <= j) {
+            while (ar[i].compareTo(opora)< 0) {
+                i++;
+            }
+
+            while (ar[j].compareTo(opora)> 0) {
+                j--;
+            }
+
+            if (i <= j) {//меняем местами
+                String temp = ar[i];
+                ar[i] = ar[j];
+                ar[j] = temp;
+                i++;
+                j--;
+            }
+        }
+
+        // вызов рекурсии для сортировки левой и правой части
+        if (low < j)
+            quickSort(ar, low, j);
+
+        if (high > i)
+            quickSort(ar, i, high);
     }
 }
