@@ -2,37 +2,37 @@ package Array;
 
 import java.util.Arrays;
 
-public class MyArrayListImpl implements MyArray{
+public class MyArrayListImpl<E> implements MyArray<E>{
 
-    private String[] ar;
+    private E[] ar;
     private int size = 0;
 
     @Override
-    public String get(int index) {
+    public E get(int index) {
         checkIndex(index);
         return ar[index];
     }
 
     @Override
-    public void add(String string) {
+    public void add(E elem) {
         checkLength();
-        ar[size++] = string;
+        ar[size++] = elem;
 
     }
 
     @Override
-    public void add(String string, int index) {
+    public void add(E elem, int index) {
         checkLength();
         for (int i = size; i > index; i--) {
             ar[i] = ar[i-1];
         }
-        ar[index] = string;
+        ar[index] = elem;
         size++;
     }
 
     @Override
-    public void remove(String string) {
-        int pos = Index(string);
+    public void remove(E elem) {
+        int pos = Index(elem);
 
         if(pos < 0){
             return;
@@ -55,22 +55,21 @@ public class MyArrayListImpl implements MyArray{
     }
 
     @Override
-    public void set(String string, int index) {
-        ar[index] = string;
+    public void set(E elem, int index) {
+        ar[index] = elem;
     }
 
     @Override
     public void clear() {
-        ar = new String[10];
         size = 0;
 
     }
-    private int Index(String string){
-        if (string == null)
+    private int Index(E elem){
+        if (elem == null)
             return -1;
 
         for (int i = 0; i < size; i++) {
-            if(string.equals(ar[i]))
+            if(elem.equals(ar[i]))
              return i;
         }
 
@@ -85,7 +84,7 @@ public class MyArrayListImpl implements MyArray{
 
     private void checkLength(){
         if (ar == null){
-            ar = new String[10];
+            ar = (E[]) new Object[10];
         }
 
         if(size >= ar.length){
@@ -102,7 +101,7 @@ public class MyArrayListImpl implements MyArray{
         quickSort(ar, 0, this.size - 1);
     }
 
-    private void quickSort(String[] array, int low, int high) {
+    private void quickSort(E[] array, int low, int high) {
         if (ar.length == 0)
             return;//завершить выполнение если длина массива равна 0
 
@@ -111,21 +110,21 @@ public class MyArrayListImpl implements MyArray{
 
         // выбрать опорный элемент
         int middle = low + (high - low) / 2;
-        String opora = ar[middle];
+        E opora = ar[middle];
 
         // разделить на подмассивы, который больше и меньше опорного элемента
         int i = low, j = high;
         while (i <= j) {
-            while (ar[i].compareTo(opora)< 0) {
+            while (((Comparable)ar[i]).compareTo(opora) < 0) {
                 i++;
             }
 
-            while (ar[j].compareTo(opora)> 0) {
+            while (((Comparable)ar[j]).compareTo(opora) > 0) {
                 j--;
             }
 
             if (i <= j) {//меняем местами
-                String temp = ar[i];
+                E temp = ar[i];
                 ar[i] = ar[j];
                 ar[j] = temp;
                 i++;

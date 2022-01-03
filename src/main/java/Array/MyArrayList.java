@@ -2,7 +2,7 @@ package Array;
 
 public class MyArrayList {
     public static void main(String[] args) {
-        MyArrayListImpl  myArrayList = new MyArrayListImpl ();
+        MyArrayListImpl<String>  myArrayList = new MyArrayListImpl<> ();
 
         myArrayList.add("a");
         System.out.println("array size:" + myArrayList.size());
@@ -34,6 +34,7 @@ public class MyArrayList {
         myArrayList.quickSort();
         System.out.println("array size:" + myArrayList.size());
         System.out.println(myArrayList);
+
 
     }
 
