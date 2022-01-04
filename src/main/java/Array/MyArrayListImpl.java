@@ -2,6 +2,13 @@ package Array;
 
 import java.util.Arrays;
 
+/**
+ * Implementation of {@link MyArray}.
+ * Date 04.01.2022
+ *
+ * @author Kukhar Nikolai
+ */
+
 public class MyArrayListImpl<E> implements MyArray<E>{
 
     private E[] ar;
@@ -43,6 +50,7 @@ public class MyArrayListImpl<E> implements MyArray<E>{
 
     @Override
     public void remove(int index) {
+        checkIndex(index);
         for (int i = index; i < size; i++) {
             ar[i] = ar[i+1];
         }

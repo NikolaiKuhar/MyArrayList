@@ -15,15 +15,10 @@ public class MyArrayList {
         System.out.println(myArrayList);
 
         //----------------------------------------------
-        myArrayList.remove(1);
-        System.out.println("array size:" + myArrayList.size());
-        System.out.println(myArrayList);
 
         myArrayList.remove("a");
         System.out.println("array size:" + myArrayList.size());
         System.out.println(myArrayList);
-
-
         //----------------------------------------------
         myArrayList.add("z");
         myArrayList.add("y");
