@@ -64,6 +64,7 @@ public class MyArrayListImpl<E> implements MyArray<E>{
 
     @Override
     public void set(E elem, int index) {
+        checkIndex(index);
         ar[index] = elem;
     }
 

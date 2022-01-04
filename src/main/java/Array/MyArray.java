@@ -52,6 +52,7 @@ public interface MyArray<E> {
      * Inserting an element by index
      * @param elem the element to by inserted
      * @param index the index where we insert the element
+     * @throws IndexOutOfBoundsException checking if an element with such an index
      */
     void set(E elem, int index);
 
