@@ -14,6 +14,19 @@ public class MyArrayListImpl<E> implements MyArray<E>{
     private E[] ar;
     private int size = 0;
 
+
+    public MyArrayListImpl() {
+
+    }
+
+
+    public MyArrayListImpl(int initCapacity) {
+        if (initCapacity < 1){
+            throw new IllegalArgumentException();
+        }
+        this.ar = (E[]) new Object[initCapacity];
+    }
+
     @Override
     public E get(int index) {
         checkIndex(index);
@@ -30,9 +43,7 @@ public class MyArrayListImpl<E> implements MyArray<E>{
     @Override
     public void add(E elem, int index) {
         checkLength();
-        for (int i = size; i > index; i--) {
-            ar[i] = ar[i-1];
-        }
+        if (size - index >= 0) System.arraycopy(ar, index, ar, index + 1, size - index);
         ar[index] = elem;
         size++;
     }
@@ -40,7 +51,6 @@ public class MyArrayListImpl<E> implements MyArray<E>{
     @Override
     public void remove(E elem) {
         int pos = Index(elem);
-
         if(pos < 0){
             return;
         }
@@ -51,9 +61,7 @@ public class MyArrayListImpl<E> implements MyArray<E>{
     @Override
     public void remove(int index) {
         checkIndex(index);
-        for (int i = index; i < size; i++) {
-            ar[i] = ar[i+1];
-        }
+        if (size - index >= 0) System.arraycopy(ar, index + 1, ar, index, size - index);
         size--;
     }
 

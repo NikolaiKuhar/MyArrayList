@@ -70,6 +70,7 @@ public class MyArrayListTest {
         //Then
         String strList = myArray.get(50);
         assertEquals("Test", strList);
+        assertEquals(101, myArray.size());
     }
 
     @Test
@@ -86,6 +87,18 @@ public class MyArrayListTest {
         myArray.add(strTest, 100);
         String strList = myArray.get(100);
         assertEquals("Test", strList);
+    }
+
+    @Test
+    public void setIntoMiddle() {
+        //Given
+        String strTest = "Test";
+        //When
+        myArray.set(strTest, 50);
+        //Then
+        String strList = myArray.get(50);
+        assertEquals("Test", strList);
+        assertEquals(101, myArray.size());
     }
 
 
