@@ -118,7 +118,7 @@ public class MyArrayListImpl<E> implements MyArray<E>{
         quickSort(ar, 0, this.size - 1);
     }
 
-    private void quickSort(E[] array, int low, int high) {
+    private void quickSort(E[] ar, int low, int high) {
         if (ar.length == 0)
             return;//завершить выполнение если длина массива равна 0
 
